@@ -1,0 +1,21 @@
+name: deploy-auth
+
+# This will run when anything inside the master branch, specifically when any files in 
+# the paths folder changes. A merge to master, is also considered a push
+on: 
+  push:
+    branches: 
+      - master
+    paths:
+      - 'auth/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd auth && docker build -t lng88/auth .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker push lng88/auth    
