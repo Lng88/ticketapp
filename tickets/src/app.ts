@@ -16,9 +16,12 @@ app.set('trust proxy', true);
 app.use(json());
 
 // Secure property will only transfer cookies over HTTPS.
-app.use(
-  cookieSession({ signed: false, secure: process.env.NODE_ENV !== 'test' })
-);
+// app.use(
+//   cookieSession({ signed: false, secure: process.env.NODE_ENV !== 'test' })
+// );
+
+// need to use secure: false. Testing without https
+app.use(cookieSession({ signed: false, secure: false }));
 
 app.use(currentUser);
 app.use(createTicketRouter);
