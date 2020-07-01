@@ -2,7 +2,7 @@ import { natsWrapper } from './nats-wrapper';
 import { OrderCreatedListener } from './events/listeners/order-created-listener';
 
 const start = async () => {
-  console.log('Starting...');
+  console.log('Starting...!');
   // Env variables declared in kubernetes yaml deployment files
   if (!process.env.NATS_URL) throw new Error('NATS_URL must be defined');
   if (!process.env.NATS_CLUSTER_ID)
